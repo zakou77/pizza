@@ -3,36 +3,36 @@ package com.pizza;
 import java.util.Vector;
 
 public class Client {
-    public int id_Client;
-    public String Nom;
-    public String Adresse;
-    public double sold;
+    private int idClient;
+    private String nom;
+    private String adresse;
+    private double solde;
 
-    Vector<Commande> listCommande = new Vector<Commande>();
+    private Vector<Commande> listCommande = new Vector<>();
 
     // Constructeur
-    public Client(int id, String nom, String adresse, double solde) {
-        this.id_Client = id;
-        this.Nom = nom;
-        this.Adresse = adresse;
-        this.sold = solde;
+    public Client(int idClient, String nom, String adresse, double solde) {
+        this.idClient = idClient;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.solde = solde;
     }
 
     // Getters
-    public int getId_Client() {
-        return id_Client;
+    public int getIdClient() {
+        return idClient;
     }
 
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
     public String getAdresse() {
-        return Adresse;
+        return adresse;
     }
 
-    public double getSold() {
-        return sold;
+    public double getSolde() {
+        return solde;
     }
 
     public Vector<Commande> getListCommande() {
@@ -40,38 +40,38 @@ public class Client {
     }
 
     // Setters
-    public void setId_Client(int id) {
-        this.id_Client = id;
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 
     public void setNom(String nom) {
-        this.Nom = nom;
+        this.nom = nom;
     }
 
     public void setAdresse(String adresse) {
-        this.Adresse = adresse;
+        this.adresse = adresse;
     }
 
-    public void setSold(double sold) {
-        this.sold = sold;
+    public void setSolde(double solde) {
+        this.solde = solde;
     }
 
-    public void setListCommande(Vector<Commande> commandes) {
-        this.listCommande = commandes;
+    public void setListCommande(Vector<Commande> listCommande) {
+        this.listCommande = listCommande;
     }
 
-    // Méthodes utiles
-    public void ajouterCommande(Commande c) {
-        listCommande.add(c);
+    // Méthodes
+    public void ajouterCommande(Commande commande) {
+        listCommande.add(commande);
     }
 
     public boolean peutPayer(double montant) {
-        return sold >= montant;
+        return solde >= montant;
     }
 
     public void payer(double montant) {
         if (peutPayer(montant)) {
-            sold -= montant;
+            solde -= montant;
         }
     }
 }

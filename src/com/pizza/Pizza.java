@@ -1,28 +1,29 @@
+package com.pizza;
 
-import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
 public class Pizza {
-    public String nom;
-    public String Taille;
-    public double prixBase;
+    private String nom;
+    private String taille;
+    private double prixBase;
 
-    Vector<Ligne_Com> listLigne = new Vector<Ligne_Com>();
-    Vector<Ingredient> List_ing = new Vector<Ingredient>();
-    Point_Pizzaria pizzaria;
+    private Vector<LigneCommande> listLigne = new Vector<>();
+    private Vector<Ingredient> listIng = new Vector<>();
+    private PointPizzaria pizzaria;
 
-    // Constructor
-    public Pizza(String nomPizza, String taille, double prix) {
-        nom = nomPizza;
-        Taille = taille;
-        prixBase = prix;
+    // Constructeur simple
+    public Pizza(String nom, String taille, double prixBase) {
+        this.nom = nom;
+        this.taille = taille;
+        this.prixBase = prixBase;
     }
 
-    public Pizza(String nomPizza, String taille, double prix, Point_Pizzaria pz) {
-        nom = nomPizza;
-        Taille = taille;
-        prixBase = prix;
-        pizzaria = pizzaria;
+    // Constructeur complet avec point de vente
+    public Pizza(String nom, String taille, double prixBase, PointPizzaria pizzaria) {
+        this.nom = nom;
+        this.taille = taille;
+        this.prixBase = prixBase;
+        this.pizzaria = pizzaria;
     }
 
     // Getters
@@ -31,22 +32,22 @@ public class Pizza {
     }
 
     public String getTaille() {
-        return Taille;
+        return taille;
     }
 
     public double getPrixBase() {
         return prixBase;
     }
 
-    public Vector<Ligne_Com> getListLigne() {
+    public Vector<LigneCommande> getListLigne() {
         return listLigne;
     }
 
     public Vector<Ingredient> getListIng() {
-        return List_ing;
+        return listIng;
     }
 
-    public Point_Pizzaria getPizzaria() {
+    public PointPizzaria getPizzaria() {
         return pizzaria;
     }
 
@@ -56,23 +57,22 @@ public class Pizza {
     }
 
     public void setTaille(String taille) {
-        this.Taille = taille;
+        this.taille = taille;
     }
 
-    public void setPrixBase(double prix) {
-        this.prixBase = prix;
+    public void setPrixBase(double prixBase) {
+        this.prixBase = prixBase;
     }
 
-    public void setListLigne(Vector<Ligne_Com> listLigne) {
+    public void setListLigne(Vector<LigneCommande> listLigne) {
         this.listLigne = listLigne;
     }
 
     public void setListIng(Vector<Ingredient> listIng) {
-        this.List_ing = listIng;
+        this.listIng = listIng;
     }
 
-    public void setPizzaria(Point_Pizzaria pz) {
-        this.pizzaria = pz;
+    public void setPizzaria(PointPizzaria pizzaria) {
+        this.pizzaria = pizzaria;
     }
-
 }

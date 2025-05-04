@@ -1,19 +1,20 @@
 package com.pizza;
 
 public class LigneCommande {
-    public int id_com;
-    public int quantite;
-
+    private int idCommande;
+    private int quantite;
     private Pizza pizza;
 
-    public LigneCommande(int id, int quantite, Pizza pizza) {
-        this.id_com = id;
+    // Constructeur
+    public LigneCommande(int idCommande, int quantite, Pizza pizza) {
+        this.idCommande = idCommande;
         this.quantite = quantite;
         this.pizza = pizza;
     }
 
-    public int getId_com() {
-        return id_com;
+    // Getters
+    public int getIdCommande() {
+        return idCommande;
     }
 
     public int getQuantite() {
@@ -24,15 +25,21 @@ public class LigneCommande {
         return pizza;
     }
 
-    public void setPizza(Pizza pizza) {
-        this.pizza = pizza;
+    // Setters
+    public void setIdCommande(int idCommande) {
+        this.idCommande = idCommande;
     }
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 
-    public void setId_com(int id_com) {
-        this.id_com = id_com;
+    public void setPizza(Pizza pizza) {
+        this.pizza = pizza;
+    }
+
+    // Méthode pour calculer le prix total de la ligne
+    public double getPrixTotal() {
+        return pizza.getPrixBase() * quantite;
     }
 }

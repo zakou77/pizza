@@ -1,20 +1,20 @@
 package com.pizza;
 
 public class Ingredient {
-    public int id_ing;
-    public String nom;
-    public double prix;
+    private int idIngredient;
+    private String nom;
+    private double prix;
 
     // Constructeur
-    public Ingredient(int id, String nom, double prix) {
-        this.id_ing = id;
+    public Ingredient(int idIngredient, String nom, double prix) {
+        this.idIngredient = idIngredient;
         this.nom = nom;
         this.prix = prix;
     }
 
     // Getters
-    public int getId_ing() {
-        return id_ing;
+    public int getIdIngredient() {
+        return idIngredient;
     }
 
     public String getNom() {
@@ -26,8 +26,8 @@ public class Ingredient {
     }
 
     // Setters
-    public void setId_ing(int id_ing) {
-        this.id_ing = id_ing;
+    public void setIdIngredient(int idIngredient) {
+        this.idIngredient = idIngredient;
     }
 
     public void setNom(String nom) {

@@ -3,29 +3,28 @@ package com.pizza;
 import java.util.Vector;
 
 public class Commande {
-    public int num_com;
-    public String date_com;
-
+    private int numCommande;
+    private String dateCommande;
     private Client client;
     private Livreur livreur;
 
-    Vector<LigneCommande> list_ligne = new Vector<LigneCommande>();
+    private Vector<LigneCommande> lignesCommande = new Vector<>();
 
     // Constructeur
-    public Commande(int num, String date, Client client, Livreur livreur) {
-        this.num_com = num;
-        this.date_com = date;
+    public Commande(int numCommande, String dateCommande, Client client, Livreur livreur) {
+        this.numCommande = numCommande;
+        this.dateCommande = dateCommande;
         this.client = client;
         this.livreur = livreur;
     }
 
     // Getters
-    public int getNum_com() {
-        return num_com;
+    public int getNumCommande() {
+        return numCommande;
     }
 
-    public String getDate_com() {
-        return date_com;
+    public String getDateCommande() {
+        return dateCommande;
     }
 
     public Client getClient() {
@@ -36,17 +35,17 @@ public class Commande {
         return livreur;
     }
 
-    public Vector<LigneCommande> getList_ligne() {
-        return list_ligne;
+    public Vector<LigneCommande> getLignesCommande() {
+        return lignesCommande;
     }
 
     // Setters
-    public void setNum_com(int num_com) {
-        this.num_com = num_com;
+    public void setNumCommande(int numCommande) {
+        this.numCommande = numCommande;
     }
 
-    public void setDate_com(String date_com) {
-        this.date_com = date_com;
+    public void setDateCommande(String dateCommande) {
+        this.dateCommande = dateCommande;
     }
 
     public void setClient(Client client) {
@@ -57,20 +56,20 @@ public class Commande {
         this.livreur = livreur;
     }
 
-    public void setList_ligne(Vector<LigneCommande> lignes) {
-        this.list_ligne = lignes;
+    public void setLignesCommande(Vector<LigneCommande> lignesCommande) {
+        this.lignesCommande = lignesCommande;
     }
 
-    // Ajout d'une ligne à la commande
+    // Ajouter une ligne
     public void ajouterLigne(LigneCommande ligne) {
-        list_ligne.add(ligne);
+        lignesCommande.add(ligne);
     }
 
-    // Calcul total
+    // Calculer le prix total de la commande
     public double calculerPrixTotal() {
         double total = 0;
-        for (LigneCommande ligne : list_ligne) {
-            total += ligne.getPrixTotal();
+        for (LigneCommande ligne : lignesCommande) {
+            total += ligne.getQuantite() * ligne.getPizza().getPrixBase();
         }
         return total;
     }
