@@ -9,7 +9,7 @@ public class Commande {
     private Client client;
     private Livreur livreur;
 
-    Vector<Ligne_Com> list_ligne = new Vector<Ligne_Com>();
+    Vector<LigneCommande> list_ligne = new Vector<LigneCommande>();
 
     // Constructeur
     public Commande(int num, String date, Client client, Livreur livreur) {
@@ -36,7 +36,7 @@ public class Commande {
         return livreur;
     }
 
-    public Vector<Ligne_Com> getList_ligne() {
+    public Vector<LigneCommande> getList_ligne() {
         return list_ligne;
     }
 
@@ -57,19 +57,19 @@ public class Commande {
         this.livreur = livreur;
     }
 
-    public void setList_ligne(Vector<Ligne_Com> lignes) {
+    public void setList_ligne(Vector<LigneCommande> lignes) {
         this.list_ligne = lignes;
     }
 
     // Ajout d'une ligne à la commande
-    public void ajouterLigne(Ligne_Com ligne) {
+    public void ajouterLigne(LigneCommande ligne) {
         list_ligne.add(ligne);
     }
 
     // Calcul total
     public double calculerPrixTotal() {
         double total = 0;
-        for (Ligne_Com ligne : list_ligne) {
+        for (LigneCommande ligne : list_ligne) {
             total += ligne.getPrixTotal();
         }
         return total;
