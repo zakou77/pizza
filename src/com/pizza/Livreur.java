@@ -1,30 +1,34 @@
 package com.pizza;
 
 public class Livreur {
-    private int idLivreur;
-    private String moyenTransport; // Ex: "Scooter", "Voiture", etc.
+    public int id_liv;
+    public String nom_L;
+    public String type_Vec;
+    private Point_Pizzaria pizzaria;
 
-    // Constructeur
-    public Livreur(int idLivreur, String moyenTransport) {
-        this.idLivreur = idLivreur;
-        this.moyenTransport = moyenTransport;
+    public Livreur(int id, String nom, String type) {
+        id_liv = id;
+        nom_L = nom;
+        type_Vec = type;
     }
 
-    // Getters
-    public int getIdLivreur() {
-        return idLivreur;
+    public int getId_liv() {
+        return id_liv;
     }
 
-    public String getMoyenTransport() {
-        return moyenTransport;
+    public String getNom_L() {
+        return nom_L;
     }
 
-    // Setters
-    public void setIdLivreur(int idLivreur) {
-        this.idLivreur = idLivreur;
+    public String getType_Vec() {
+        return type_Vec;
     }
 
-    public void setMoyenTransport(String moyenTransport) {
-        this.moyenTransport = moyenTransport;
+    public Point_Pizzaria getPizzaria() {
+        return pizzaria;
+    }
+
+    public void setPizzaria(Point_Pizzaria pz) {
+        pizzaria = pz;
     }
 }

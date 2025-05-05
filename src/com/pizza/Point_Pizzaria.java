@@ -1,46 +1,36 @@
 package com.pizza;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PointPizzaria {
-    private int idPizzaria;
+public class Point_Pizzaria {
     private String adresse;
-    private Vector<Pizza> listePizzas = new Vector<>();
+    private List<Pizza> menu;
+    private List<Livreur> livreurs;
 
-    // Constructeur
-    public PointPizzaria(int idPizzaria, String adresse) {
-        this.idPizzaria = idPizzaria;
+    public Point_Pizzaria(String adresse) {
         this.adresse = adresse;
-    }
-
-    // Getters
-    public int getIdPizzaria() {
-        return idPizzaria;
+        this.menu = new ArrayList<>();
+        this.livreurs = new ArrayList<>();
     }
 
     public String getAdresse() {
         return adresse;
     }
 
-    public Vector<Pizza> getListePizzas() {
-        return listePizzas;
+    public List<Pizza> getMenu() {
+        return menu;
     }
 
-    // Setters
-    public void setIdPizzaria(int idPizzaria) {
-        this.idPizzaria = idPizzaria;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public void setListePizzas(Vector<Pizza> listePizzas) {
-        this.listePizzas = listePizzas;
-    }
-
-    // Méthode pour ajouter une pizza
     public void ajouterPizza(Pizza pizza) {
-        listePizzas.add(pizza);
+        menu.add(pizza);
+    }
+
+    public void ajouterLivreur(Livreur livreur) {
+        livreurs.add(livreur);
+    }
+
+    public List<Livreur> getLivreurs() {
+        return livreurs;
     }
 }

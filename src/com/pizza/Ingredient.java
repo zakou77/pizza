@@ -1,40 +1,29 @@
 package com.pizza;
 
 public class Ingredient {
-    private int idIngredient;
-    private String nom;
-    private double prix;
+    public String nom;
+    public int quantite;
 
-    // Constructeur
-    public Ingredient(int idIngredient, String nom, double prix) {
-        this.idIngredient = idIngredient;
+    public Ingredient(String nom, int quantite) {
         this.nom = nom;
-        this.prix = prix;
+        this.quantite = quantite;
     }
 
     // Getters
-    public int getIdIngredient() {
-        return idIngredient;
-    }
-
     public String getNom() {
         return nom;
     }
 
-    public double getPrix() {
-        return prix;
+    public int getQuantite() {
+        return quantite;
     }
 
     // Setters
-    public void setIdIngredient(int idIngredient) {
-        this.idIngredient = idIngredient;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public void setPrix(double prix) {
-        this.prix = prix;
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 }

@@ -3,27 +3,26 @@ package com.pizza;
 import java.util.Vector;
 
 public class Pizza {
-    private String nom;
-    private String taille;
-    private double prixBase;
+    public String nom;
+    public String taille;
+    public double prixBase;
 
     private Vector<LigneCommande> listLigne = new Vector<>();
     private Vector<Ingredient> listIng = new Vector<>();
-    private PointPizzaria pizzaria;
+    private Point_Pizzaria pizzaria;
 
-    // Constructeur simple
-    public Pizza(String nom, String taille, double prixBase) {
-        this.nom = nom;
+    // Constructeurs
+    public Pizza(String nomPizza, String taille, double prix) {
+        this.nom = nomPizza;
         this.taille = taille;
-        this.prixBase = prixBase;
+        this.prixBase = prix;
     }
 
-    // Constructeur complet avec point de vente
-    public Pizza(String nom, String taille, double prixBase, PointPizzaria pizzaria) {
-        this.nom = nom;
+    public Pizza(String nomPizza, String taille, double prix, Point_Pizzaria pz) {
+        this.nom = nomPizza;
         this.taille = taille;
-        this.prixBase = prixBase;
-        this.pizzaria = pizzaria;
+        this.prixBase = prix;
+        this.pizzaria = pz;
     }
 
     // Getters
@@ -47,7 +46,7 @@ public class Pizza {
         return listIng;
     }
 
-    public PointPizzaria getPizzaria() {
+    public Point_Pizzaria getPizzaria() {
         return pizzaria;
     }
 
@@ -60,8 +59,8 @@ public class Pizza {
         this.taille = taille;
     }
 
-    public void setPrixBase(double prixBase) {
-        this.prixBase = prixBase;
+    public void setPrixBase(double prix) {
+        this.prixBase = prix;
     }
 
     public void setListLigne(Vector<LigneCommande> listLigne) {
@@ -72,7 +71,7 @@ public class Pizza {
         this.listIng = listIng;
     }
 
-    public void setPizzaria(PointPizzaria pizzaria) {
-        this.pizzaria = pizzaria;
+    public void setPizzaria(Point_Pizzaria pz) {
+        this.pizzaria = pz;
     }
 }
