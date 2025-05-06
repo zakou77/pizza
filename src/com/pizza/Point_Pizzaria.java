@@ -2,11 +2,14 @@ package com.pizza;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Point_Pizzaria {
     private String adresse;
-    private List<Pizza> menu;
-    private List<Livreur> livreurs;
+    private List<Pizza> menu = new Vector<Pizza>();
+    private List<Livreur> livreurs = new Vector<Livreur>();
+
+    private Vector<Client> listCl = new Vector<Client>();
 
     public Point_Pizzaria(String adresse) {
         this.adresse = adresse;
@@ -33,4 +36,12 @@ public class Point_Pizzaria {
     public List<Livreur> getLivreurs() {
         return livreurs;
     }
+
+    public Pizza getPizza(String nom, String taille) {
+        return menu.stream()
+                .filter(p -> p.getNom().equals(nom) && p.getTaille().equals(taille))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

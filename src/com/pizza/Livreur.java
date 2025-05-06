@@ -1,10 +1,13 @@
 package com.pizza;
 
+import java.util.Vector;
+
 public class Livreur {
     public int id_liv;
     public String nom_L;
     public String type_Vec;
     private Point_Pizzaria pizzaria;
+    private Vector <Commande> listCl = new Vector<Commande>();
 
     public Livreur(int id, String nom, String type) {
         id_liv = id;

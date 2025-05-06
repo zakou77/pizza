@@ -9,6 +9,7 @@ public class Client {
     public double solde;
 
     private Vector<Commande> listC = new Vector<>();
+    private Point_Pizzaria pizzaria;
 
     public Client(int id, String nom, String adresse, double solde) {
         this.id_Client = id;
