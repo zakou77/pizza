@@ -2,26 +2,20 @@ package com.pizza;
 
 public class Main {
     public static void main(String[] args) {
-        // Initialisation du modèle
-        Point_Pizzaria pizzaria = new Point_Pizzaria("Paris");
-        initialiserMenuPizzas(pizzaria);
+        // Création du point de vente
+        Point_Pizzaria pizzaria = new Point_Pizzaria("123 Rue de la Pizza");
 
-        Client client = new Client(1, "Zak", "Paris", 50.0, 123456789);
-        Livreur livreur = new Livreur(1, "Karim", "Scooter");
+        // Ajout d'un livreur fictif pour la démonstration
+        Livreur livreur = new Livreur(1, "Mario", "a", 00);
+        Client Client = new Client(12, "djdi", "3", 100, 910990);
+        // Optionnel : ajout d'exemples de pizzas
+        pizzaria.ajouterPizza(new Pizza("Margherita", "Moyenne", 8.50));
+        pizzaria.ajouterPizza(new Pizza("Pepperoni", "Grande", 10.50));
 
-        // Initialisation de la vue améliorée
-        VueClient vueAmelioree = new VueClient();
+        // Création de la vue de connexion
+        VueConnexion vueConnexion = new VueConnexion();
 
-        // Contrôleur associé
-        new ControlerClient(vueAmelioree, client, pizzaria, livreur);
-    }
-
-    private static void initialiserMenuPizzas(Point_Pizzaria pizzaria) {
-        pizzaria.ajouterPizza(new Pizza("Margherita", "NAINE", 5.0));
-        pizzaria.ajouterPizza(new Pizza("Margherita", "HUMAINE", 7.0));
-        pizzaria.ajouterPizza(new Pizza("Margherita", "OGRESSE", 9.0));
-        pizzaria.ajouterPizza(new Pizza("Pepperoni", "NAINE", 6.0));
-        pizzaria.ajouterPizza(new Pizza("Pepperoni", "HUMAINE", 8.0));
-        pizzaria.ajouterPizza(new Pizza("Pepperoni", "OGRESSE", 10.0));
+        // Lancement du contrôleur de connexion
+        new ControleurConnexion(vueConnexion, pizzaria, livreur);
     }
 }

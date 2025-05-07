@@ -9,7 +9,7 @@ public class Livreur {
     private Point_Pizzaria pizzaria;
     private Vector <Commande> listCl = new Vector<Commande>();
 
-    public Livreur(int id, String nom, String type) {
+    public Livreur(int id, String nom, String type, int i) {
         id_liv = id;
         nom_L = nom;
         type_Vec = type;

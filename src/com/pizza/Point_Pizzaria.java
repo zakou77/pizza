@@ -1,20 +1,21 @@
 package com.pizza;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 public class Point_Pizzaria {
-    private String adresse;
-    private List<Pizza> menu = new Vector<Pizza>();
-    private List<Livreur> livreurs = new Vector<Livreur>();
 
-    private Vector<Client> listCl = new Vector<Client>();
+    private String adresse;
+    private List<Pizza> menu;
+    private List<Livreur> livreurs;
+    private List<Client> clients;
 
     public Point_Pizzaria(String adresse) {
         this.adresse = adresse;
         this.menu = new ArrayList<>();
         this.livreurs = new ArrayList<>();
+        this.clients = new ArrayList<>();
     }
 
     public String getAdresse() {
@@ -22,7 +23,15 @@ public class Point_Pizzaria {
     }
 
     public List<Pizza> getMenu() {
-        return menu;
+        return Collections.unmodifiableList(menu);
+    }
+
+    public List<Livreur> getLivreurs() {
+        return Collections.unmodifiableList(livreurs);
+    }
+
+    public List<Client> getClients() {
+        return Collections.unmodifiableList(clients);
     }
 
     public void ajouterPizza(Pizza pizza) {
@@ -33,8 +42,8 @@ public class Point_Pizzaria {
         livreurs.add(livreur);
     }
 
-    public List<Livreur> getLivreurs() {
-        return livreurs;
+    public void ajouterClient(Client client) {
+        clients.add(client);
     }
 
     public Pizza getPizza(String nom, String taille) {
@@ -44,4 +53,20 @@ public class Point_Pizzaria {
                 .orElse(null);
     }
 
+    public Client connecterClient(int numeroTelephone) {
+        for (Client c : clients) {
+            if (c.getTelephone() == numeroTelephone) {
+                return c;
+            }
+        }
+        Client nouveauClient = new Client(
+                clients.size() + 1,
+                "Client" + numeroTelephone,
+                "Adresse inconnue",
+                50.0,
+                numeroTelephone
+        );
+        clients.add(nouveauClient);
+        return nouveauClient;
+    }
 }
