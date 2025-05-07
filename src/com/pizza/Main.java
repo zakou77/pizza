@@ -1,23 +1,19 @@
 package com.pizza;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         // Initialisation du modèle
         Point_Pizzaria pizzaria = new Point_Pizzaria("Paris");
         initialiserMenuPizzas(pizzaria);
 
-        Client client = new Client(1, "Zak", "Paris", 50);
+        Client client = new Client(1, "Zak", "Paris", 50.0, 123456789);
         Livreur livreur = new Livreur(1, "Karim", "Scooter");
-        List<Commande> historiqueCommandes = new ArrayList<>();
 
-        // Initialisation de la vue
-        VuePizzaSwing vue = new VuePizzaSwing();
+        // Initialisation de la vue améliorée
+        VueClient vueAmelioree = new VueClient();
 
-        // Lancement du contrôleur
-        new ControllerPizzaSwing(vue, pizzaria, client, livreur, historiqueCommandes);
+        // Contrôleur associé
+        new ControlerClient(vueAmelioree, client, pizzaria, livreur);
     }
 
     private static void initialiserMenuPizzas(Point_Pizzaria pizzaria) {
