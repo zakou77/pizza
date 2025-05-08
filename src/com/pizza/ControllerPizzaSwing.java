@@ -3,6 +3,7 @@ package com.pizza;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.*;
 
 public class ControllerPizzaSwing {
 
@@ -22,13 +23,9 @@ public class ControllerPizzaSwing {
         this.livreur = livreur;
         this.historiqueCommandes = historiqueCommandes;
 
-        // Remplir la liste des pizzas dans la vue
         vue.setPizzaOptions(getNomsPizzas());
-
-        // Initialiser la première commande
         nouvelleCommande();
 
-        // Lier les boutons à leurs actions
         vue.setAjouterListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,6 +37,13 @@ public class ControllerPizzaSwing {
             @Override
             public void actionPerformed(ActionEvent e) {
                 payerCommande();
+            }
+        });
+
+        vue.setHistoriqueListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                afficherHistorique(); // ✅ Ajouté
             }
         });
     }
@@ -88,5 +92,30 @@ public class ControllerPizzaSwing {
         } else {
             vue.appendZoneCommande("\n❌ Solde insuffisant !\n");
         }
+    }
+
+    private void afficherHistorique() {
+        JFrame frame = new JFrame("Historique des commandes");
+        JTextArea area = new JTextArea(20, 50);
+        area.setEditable(false);
+
+        if (historiqueCommandes.isEmpty()) {
+            area.setText("Aucune commande passée.");
+        } else {
+            for (Commande cmd : historiqueCommandes) {
+                area.append("Commande #" + cmd.getNumCommande() + "\n");
+                for (LigneCommande ligne : cmd.getLignes()) {
+                    area.append("- " + ligne.getQuantite() + " x " + ligne.getPizza().getNom() +
+                            " (" + ligne.getPizza().getTaille() + ") = " +
+                            (ligne.getQuantite() * ligne.getPizza().getPrixBase()) + "€\n");
+                }
+                area.append("Total : " + cmd.calculerPrixTotal() + "€\n\n");
+            }
+        }
+
+        frame.add(new JScrollPane(area));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

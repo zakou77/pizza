@@ -13,6 +13,7 @@ public class VuePizzaSwing extends JFrame {
     private JLabel labelPrixTotal;
     private JButton ajouterBtn;
     private JButton payerBtn;
+    private JButton historiqueBtn; // ✅ Ajouté
 
     public VuePizzaSwing() {
         setTitle("Commande de Pizza");
@@ -51,9 +52,13 @@ public class VuePizzaSwing extends JFrame {
         labelPrixTotal = new JLabel("Prix Total : 0€");
         bottomPanel.add(labelPrixTotal, BorderLayout.WEST);
 
+        JPanel rightPanel = new JPanel(new GridLayout(2, 1));
         payerBtn = new JButton("Payer et Livrer");
-        bottomPanel.add(payerBtn, BorderLayout.SOUTH);
+        historiqueBtn = new JButton("Voir Historique"); // ✅ Ajouté
+        rightPanel.add(payerBtn);
+        rightPanel.add(historiqueBtn); // ✅ Ajouté
 
+        bottomPanel.add(rightPanel, BorderLayout.EAST);
         add(bottomPanel, BorderLayout.SOUTH);
 
         setVisible(true);
@@ -95,5 +100,9 @@ public class VuePizzaSwing extends JFrame {
 
     public void setPayerListener(ActionListener listener) {
         payerBtn.addActionListener(listener);
+    }
+
+    public void setHistoriqueListener(ActionListener listener) {
+        historiqueBtn.addActionListener(listener); // ✅ Ajouté
     }
 }

@@ -34,4 +34,8 @@ public class Commande {
         }
         return total;
     }
+
+    public LigneCommande[] getLignes() {
+        return lignes.toArray(new LigneCommande[lignes.size()]);
+    }
 }

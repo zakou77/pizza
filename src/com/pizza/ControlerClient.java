@@ -2,6 +2,7 @@ package com.pizza;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ControlerClient {
 
@@ -60,6 +61,7 @@ public class ControlerClient {
 
     private void lancerVueClient() {
         vue.dispose();
-        new VuePizzaSwing();
+        VuePizzaSwing vue = new VuePizzaSwing();
+        new ControllerPizzaSwing(vue, pizzaria, client, livreur, new ArrayList<>());
     }
 }
