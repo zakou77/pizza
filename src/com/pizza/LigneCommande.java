@@ -1,20 +1,21 @@
 package com.pizza;
 
 public class LigneCommande {
-    private int idCommande;
+
+    private int numCommande;
     private int quantite;
     private Pizza pizza;
+    private String taille;
 
-    // Constructeur
-    public LigneCommande(int idCommande, int quantite, Pizza pizza) {
-        this.idCommande = idCommande;
+    public LigneCommande(int numCommande, int quantite, Pizza pizza, String taille) {
+        this.numCommande = numCommande;
         this.quantite = quantite;
         this.pizza = pizza;
+        this.taille = taille;
     }
 
-    // Getters
-    public int getIdCommande() {
-        return idCommande;
+    public int getNumCommande() {
+        return numCommande;
     }
 
     public int getQuantite() {
@@ -25,21 +26,20 @@ public class LigneCommande {
         return pizza;
     }
 
-    // Setters
-    public void setIdCommande(int idCommande) {
-        this.idCommande = idCommande;
+    public String getTaille() {
+        return taille;
     }
 
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
+    public void setTaille(String taille) {
+        this.taille = taille;
     }
 
-    public void setPizza(Pizza pizza) {
-        this.pizza = pizza;
-    }
-
-    // Méthode pour calculer le prix total de la ligne
-    public double getPrixTotal() {
-        return pizza.getPrixBase() * quantite;
+    public double getPrixLigne() {
+        double coef = switch (taille) {
+            case "NAINE" -> 0.8;
+            case "OGRESSE" -> 1.2;
+            default -> 1.0;
+        };
+        return quantite * pizza.getPrixBase() * coef;
     }
 }

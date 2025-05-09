@@ -46,9 +46,10 @@ public class Point_Pizzaria {
         clients.add(client);
     }
 
-    public Pizza getPizza(String nom, String taille) {
+    // ✅ Simplifié : plus de recherche par taille
+    public Pizza getPizza(String nom) {
         return menu.stream()
-                .filter(p -> p.getNom().equals(nom) && p.getTaille().equals(taille))
+                .filter(p -> p.getNom().equalsIgnoreCase(nom))
                 .findFirst()
                 .orElse(null);
     }

@@ -12,8 +12,9 @@ public class VuePizzaSwing extends JFrame {
     private JSpinner quantiteSpinner;
     private JLabel labelPrixTotal;
     private JButton ajouterBtn;
+    private JButton supprimerBtn;
     private JButton payerBtn;
-    private JButton retourBtn; // ✅ Ajouté
+    private JButton retourBtn;
 
     public VuePizzaSwing() {
         setTitle("Commande de Pizza");
@@ -22,43 +23,43 @@ public class VuePizzaSwing extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Panel du haut
-        JPanel topPanel = new JPanel();
-        topPanel.add(new JLabel("Pizza:"));
+        // ✅ Top bar classique sans espace inutile
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pizzaBox = new JComboBox<>();
-        topPanel.add(pizzaBox);
-
-        topPanel.add(new JLabel("Taille:"));
         tailleBox = new JComboBox<>(new String[]{"NAINE", "HUMAINE", "OGRESSE"});
-        topPanel.add(tailleBox);
-
-        topPanel.add(new JLabel("Quantité:"));
-        quantiteSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
-        topPanel.add(quantiteSpinner);
-
+        quantiteSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
         ajouterBtn = new JButton("Ajouter");
-        topPanel.add(ajouterBtn);
+        supprimerBtn = new JButton("Supprimer");
 
+        topPanel.add(new JLabel("Pizza:"));
+        topPanel.add(pizzaBox);
+        topPanel.add(new JLabel("Taille:"));
+        topPanel.add(tailleBox);
+        topPanel.add(new JLabel("Quantité:"));
+        topPanel.add(quantiteSpinner);
+        topPanel.add(ajouterBtn);
+        topPanel.add(supprimerBtn);
         add(topPanel, BorderLayout.NORTH);
 
-        // Zone centrale
+        // ✅ Zone centrale
         zoneCommande = new JTextArea();
         zoneCommande.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(zoneCommande);
-        add(scrollPane, BorderLayout.CENTER);
+        zoneCommande.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        add(new JScrollPane(zoneCommande), BorderLayout.CENTER);
 
-        // Bas de fenêtre
+        // ✅ Bottom bar
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        labelPrixTotal = new JLabel("Prix Total : 0€");
+        labelPrixTotal = new JLabel("Prix Total : 0.00€");
         bottomPanel.add(labelPrixTotal, BorderLayout.CENTER);
 
+        retourBtn = new JButton("Retour");
+        payerBtn = new JButton("Payer et Livrer");
+
         JPanel leftPanel = new JPanel();
-        retourBtn = new JButton("Retour"); // ✅ Ajouté
         leftPanel.add(retourBtn);
         bottomPanel.add(leftPanel, BorderLayout.WEST);
 
-        JPanel rightPanel = new JPanel(new GridLayout(1, 1));
-        payerBtn = new JButton("Payer et Livrer");
+        JPanel rightPanel = new JPanel();
         rightPanel.add(payerBtn);
         bottomPanel.add(rightPanel, BorderLayout.EAST);
 
@@ -67,7 +68,7 @@ public class VuePizzaSwing extends JFrame {
         setVisible(true);
     }
 
-    // === Accesseurs pour le contrôleur ===
+    // === Getters pour le contrôleur ===
 
     public void setPizzaOptions(String[] nomsPizzas) {
         pizzaBox.setModel(new DefaultComboBoxModel<>(nomsPizzas));
@@ -94,7 +95,7 @@ public class VuePizzaSwing extends JFrame {
     }
 
     public void setPrixTotal(double prix) {
-        labelPrixTotal.setText("Prix Total : " + prix + "€");
+        labelPrixTotal.setText("Prix Total : " + String.format("%.2f", prix) + "€");
     }
 
     public void setAjouterListener(ActionListener listener) {
@@ -106,6 +107,10 @@ public class VuePizzaSwing extends JFrame {
     }
 
     public void setRetourListener(ActionListener listener) {
-        retourBtn.addActionListener(listener); // ✅ Ajouté
+        retourBtn.addActionListener(listener);
+    }
+
+    public void setSupprimerListener(ActionListener listener) {
+        supprimerBtn.addActionListener(listener);
     }
 }

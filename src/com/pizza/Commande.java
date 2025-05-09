@@ -30,12 +30,27 @@ public class Commande {
     public double calculerPrixTotal() {
         double total = 0;
         for (LigneCommande ligne : lignes) {
-            total += ligne.getQuantite() * ligne.getPizza().getPrixBase();
+            total += ligne.getPrixLigne();
         }
         return total;
     }
 
     public LigneCommande[] getLignes() {
-        return lignes.toArray(new LigneCommande[lignes.size()]);
+        return lignes.toArray(new LigneCommande[0]);
     }
+
+    public void retirerDerniereLigne() {
+        if (!lignes.isEmpty()) {
+            lignes.remove(lignes.size() - 1);
+        }
+    }
+    public int getNombreTotalPayant() {
+        int total = 0;
+        for (LigneCommande l : lignes) {
+            if (l.getPrixLigne() > 0) total += l.getQuantite();
+        }
+        return total;
+    }
+
+
 }

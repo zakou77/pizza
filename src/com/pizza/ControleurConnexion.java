@@ -1,52 +1,66 @@
 package com.pizza;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ControleurConnexion {
 
-    private VueConnexion vue;
+    private VueConnexion vueConnexion;
     private Point_Pizzaria pizzaria;
     private Livreur livreur;
-    private List<Commande> historiqueCommandes; // ✅ Ajouté
+    private List<Commande> historiqueCommandes;
+    private List<String[]> profils;
 
-    public ControleurConnexion(VueConnexion vue, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes) {
-        this.vue = vue;
+    public ControleurConnexion(VueConnexion vueConnexion, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
+        this.vueConnexion = vueConnexion;
         this.pizzaria = pizzaria;
         this.livreur = livreur;
-        this.historiqueCommandes = historiqueCommandes; // ✅ Enregistré
+        this.historiqueCommandes = historiqueCommandes;
+        this.profils = profils;
 
-        vue.setConnexionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                connecterClient();
-            }
+        this.vueConnexion.setConnexionListener(e -> {
+            String numero = vueConnexion.getNumeroSaisi();
+            verifierConnexion(numero);
         });
     }
 
-    private void connecterClient() {
-        String input = vue.getNumeroSaisi().trim();
-
-        if (input.isEmpty()) {
-            vue.afficherMessage("❗ Veuillez entrer un numéro de téléphone.");
+    public void verifierConnexion(String numero) {
+        if (!numero.matches("\\d+")) {
+            vueConnexion.afficherMessage("Le numéro ne doit contenir que des chiffres.");
             return;
         }
 
-        int numero;
-        try {
-            numero = Integer.parseInt(input);
-            if (numero <= 0) throw new NumberFormatException();
-        } catch (NumberFormatException ex) {
-            vue.afficherMessage("❌ Numéro invalide. Veuillez entrer uniquement des chiffres positifs.");
+        if (numero.length() != 10) {
+            vueConnexion.afficherMessage("Le numéro doit contenir exactement 10 chiffres.");
             return;
         }
 
-        Client client = pizzaria.connecterClient(numero);
-        vue.afficherMessage("✅ Connexion réussie. Bienvenue, " + client.getNom() + " (ID : " + client.getId_Client() + ")");
-        vue.dispose();
+        if (!numero.startsWith("06") && !numero.startsWith("07")) {
+            vueConnexion.afficherMessage("Le numéro doit commencer par 06 ou 07.");
+            return;
+        }
 
-        VueClient vueClient = new VueClient();
-        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes); // ✅ Envoie l'historique
+        for (String[] profil : profils) {
+            String prenom = profil[0];
+            String nom = profil[1];
+            String tel = profil[2];
+
+            if (tel.equals(numero)) {
+                vueConnexion.afficherMessage("Bienvenue " + prenom + " " + nom + " !");
+                vueConnexion.dispose(); // Ferme la fenêtre de connexion
+
+                // ✅ Conversion du numéro en int car Client attend un int
+                int numeroInt = Integer.parseInt(tel);
+
+                // ✅ Création du client avec les bons arguments
+                Client client = new Client(1, nom, prenom, 50.0, numeroInt);
+
+                // ✅ Lancement de la fenêtre client
+                VueClient vueClient = new VueClient();
+                new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, profils);
+                return;
+            }
+        }
+
+        vueConnexion.afficherMessage("Aucun compte n’est associé à ce numéro.");
     }
 }

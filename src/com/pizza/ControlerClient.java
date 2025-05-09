@@ -9,14 +9,16 @@ public class ControlerClient {
     private final Client client;
     private final Point_Pizzaria pizzaria;
     private final Livreur livreur;
-    private final List<Commande> historiqueCommandes; // ✅ Plus de new ArrayList ici
+    private final List<Commande> historiqueCommandes;
+    private final List<String[]> profils; // ✅ ajout de l’attribut profils
 
-    public ControlerClient(VueClient vue, Client client, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes) {
+    public ControlerClient(VueClient vue, Client client, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
         this.vue = vue;
         this.client = client;
         this.pizzaria = pizzaria;
         this.livreur = livreur;
         this.historiqueCommandes = historiqueCommandes;
+        this.profils = profils; // ✅ enregistrement de la liste
 
         vue.setVoirSoldeListener(e -> afficherSolde());
         vue.setAjouterSoldeListener(e -> ajouterSolde());
@@ -47,8 +49,9 @@ public class ControlerClient {
     private void lancerCommande() {
         vue.dispose();
         VuePizzaSwing vuePizza = new VuePizzaSwing();
-        new ControllerPizzaSwing(vuePizza, pizzaria, client, livreur, historiqueCommandes);
+        new ControllerPizzaSwing(vuePizza, pizzaria, client, livreur, historiqueCommandes, profils); // ✅ profils ajouté ici aussi
     }
+
 
     private void afficherHistorique() {
         JFrame frame = new JFrame("Historique des commandes");
@@ -62,8 +65,7 @@ public class ControlerClient {
                 area.append("Commande #" + cmd.getNumCommande() + "\n");
                 for (LigneCommande ligne : cmd.getLignes()) {
                     area.append("- " + ligne.getQuantite() + " x " + ligne.getPizza().getNom() +
-                            " (" + ligne.getPizza().getTaille() + ") = " +
-                            (ligne.getQuantite() * ligne.getPizza().getPrixBase()) + "€\n");
+                            " (" + ligne.getTaille() + ") = " + ligne.getPrixLigne() + "€\n");
                 }
                 area.append("Total : " + cmd.calculerPrixTotal() + "€\n\n");
             }
@@ -78,6 +80,6 @@ public class ControlerClient {
     private void retourConnexion() {
         vue.dispose();
         VueConnexion vueConnexion = new VueConnexion();
-        new ControleurConnexion(vueConnexion, pizzaria, livreur, historiqueCommandes);
+        new ControleurConnexion(vueConnexion, pizzaria, livreur, historiqueCommandes, profils); // ✅ profils ajouté ici
     }
 }
