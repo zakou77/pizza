@@ -1,7 +1,5 @@
 package com.pizza;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 
@@ -27,12 +25,8 @@ public class ControllerPizzaSwing {
         nouvelleCommande();
 
         vue.setAjouterListener(e -> ajouterPizzaCommande());
-
         vue.setPayerListener(e -> payerCommande());
-
-        vue.setRetourListener(e -> retourAccueil()); // ✅ Gérer retour
-
-        // Historique retiré de cette vue selon nouvelle demande
+        vue.setRetourListener(e -> retourAccueil()); // ✅ Ajouté
     }
 
     private String[] getNomsPizzas() {
@@ -43,7 +37,7 @@ public class ControllerPizzaSwing {
     }
 
     private void nouvelleCommande() {
-        commande = new Commande(numeroCommande++, "2025-05-06", client);
+        commande = new Commande(numeroCommande++, "2025-05-09", client);
         vue.setZoneCommandeText("Nouvelle commande n°" + commande.getNumCommande() + " créée\n");
         vue.setPrixTotal(0);
     }
@@ -71,6 +65,7 @@ public class ControllerPizzaSwing {
         if (client.peutPayer(total)) {
             client.payer(total);
             commande.setLivreur(livreur);
+
             vue.appendZoneCommande("\n✅ Commande payée : " + total + "€\n");
             vue.appendZoneCommande("🚚 Livrée par " + livreur.getNom_L() + " en " + livreur.getType_Vec() + "\n");
 
@@ -82,8 +77,8 @@ public class ControllerPizzaSwing {
     }
 
     private void retourAccueil() {
-        vue.dispose(); // Fermer la fenêtre actuelle
+        vue.dispose(); // Ferme la fenêtre de commande
         VueClient vueClient = new VueClient();
-        new ControlerClient(vueClient, client, pizzaria, livreur); // relance accueil
+        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes); // ✅ Corrigé : 5 paramètres
     }
 }
