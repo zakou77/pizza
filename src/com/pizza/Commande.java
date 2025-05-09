@@ -28,14 +28,12 @@ public class Commande {
     }
 
     public double calculerPrixTotal() {
-        double total = 0;
-        for (LigneCommande ligne : lignes) {
-            total += ligne.getQuantite() * ligne.getPizza().getPrixBase();
-        }
-        return total;
+        return lignes.stream()
+                .mapToDouble(LigneCommande::getPrixLigne)
+                .sum();
     }
 
     public LigneCommande[] getLignes() {
-        return lignes.toArray(new LigneCommande[lignes.size()]);
+        return lignes.toArray(new LigneCommande[0]);
     }
 }

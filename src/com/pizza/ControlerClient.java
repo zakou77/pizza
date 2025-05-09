@@ -62,8 +62,7 @@ public class ControlerClient {
                 area.append("Commande #" + cmd.getNumCommande() + "\n");
                 for (LigneCommande ligne : cmd.getLignes()) {
                     area.append("- " + ligne.getQuantite() + " x " + ligne.getPizza().getNom() +
-                            " (" + ligne.getPizza().getTaille() + ") = " +
-                            (ligne.getQuantite() * ligne.getPizza().getPrixBase()) + "€\n");
+                            " (" + ligne.getTaille() + ") = " + ligne.getPrixLigne() + "€\n");
                 }
                 area.append("Total : " + cmd.calculerPrixTotal() + "€\n\n");
             }
@@ -74,6 +73,7 @@ public class ControlerClient {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
 
     private void retourConnexion() {
         vue.dispose();

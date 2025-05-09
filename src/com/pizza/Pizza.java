@@ -3,24 +3,21 @@ package com.pizza;
 import java.util.Vector;
 
 public class Pizza {
-    public String nom;
-    public String taille;
-    public double prixBase;
+    private String nom;
+    private double prixBase;
 
     private Vector<LigneCommande> listLigne = new Vector<>();
     private Vector<Ingredient> listIng = new Vector<>();
     private Point_Pizzaria pizzaria;
 
     // Constructeurs
-    public Pizza(String nomPizza, String taille, double prix) {
+    public Pizza(String nomPizza, double prix) {
         this.nom = nomPizza;
-        this.taille = taille;
         this.prixBase = prix;
     }
 
-    public Pizza(String nomPizza, String taille, double prix, Point_Pizzaria pz) {
+    public Pizza(String nomPizza, double prix, Point_Pizzaria pz) {
         this.nom = nomPizza;
-        this.taille = taille;
         this.prixBase = prix;
         this.pizzaria = pz;
     }
@@ -28,10 +25,6 @@ public class Pizza {
     // Getters
     public String getNom() {
         return nom;
-    }
-
-    public String getTaille() {
-        return taille;
     }
 
     public double getPrixBase() {
@@ -53,10 +46,6 @@ public class Pizza {
     // Setters
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public void setTaille(String taille) {
-        this.taille = taille;
     }
 
     public void setPrixBase(double prix) {

@@ -13,7 +13,7 @@ public class VuePizzaSwing extends JFrame {
     private JLabel labelPrixTotal;
     private JButton ajouterBtn;
     private JButton payerBtn;
-    private JButton retourBtn; // ✅ Ajouté
+    private JButton retourBtn;
 
     public VuePizzaSwing() {
         setTitle("Commande de Pizza");
@@ -33,7 +33,7 @@ public class VuePizzaSwing extends JFrame {
         topPanel.add(tailleBox);
 
         topPanel.add(new JLabel("Quantité:"));
-        quantiteSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+        quantiteSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // ✅ max 100
         topPanel.add(quantiteSpinner);
 
         ajouterBtn = new JButton("Ajouter");
@@ -49,11 +49,11 @@ public class VuePizzaSwing extends JFrame {
 
         // Bas de fenêtre
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        labelPrixTotal = new JLabel("Prix Total : 0€");
+        labelPrixTotal = new JLabel("Prix Total : 0.00€");
         bottomPanel.add(labelPrixTotal, BorderLayout.CENTER);
 
         JPanel leftPanel = new JPanel();
-        retourBtn = new JButton("Retour"); // ✅ Ajouté
+        retourBtn = new JButton("Retour");
         leftPanel.add(retourBtn);
         bottomPanel.add(leftPanel, BorderLayout.WEST);
 
@@ -66,8 +66,6 @@ public class VuePizzaSwing extends JFrame {
 
         setVisible(true);
     }
-
-    // === Accesseurs pour le contrôleur ===
 
     public void setPizzaOptions(String[] nomsPizzas) {
         pizzaBox.setModel(new DefaultComboBoxModel<>(nomsPizzas));
@@ -94,7 +92,7 @@ public class VuePizzaSwing extends JFrame {
     }
 
     public void setPrixTotal(double prix) {
-        labelPrixTotal.setText("Prix Total : " + prix + "€");
+        labelPrixTotal.setText("Prix Total : " + String.format("%.2f", prix) + "€");
     }
 
     public void setAjouterListener(ActionListener listener) {
@@ -106,6 +104,6 @@ public class VuePizzaSwing extends JFrame {
     }
 
     public void setRetourListener(ActionListener listener) {
-        retourBtn.addActionListener(listener); // ✅ Ajouté
+        retourBtn.addActionListener(listener);
     }
 }
