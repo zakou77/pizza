@@ -3,6 +3,7 @@ package com.pizza;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class ControlerClient {
 
@@ -10,6 +11,7 @@ public class ControlerClient {
     private final Client client;
     private final Point_Pizzaria pizzaria;
     private final Livreur livreur;
+    private final ArrayList<Commande> historiqueCommandes = new ArrayList<>(); // ✅ Historique local
 
     public ControlerClient(VueClient vue, Client client, Point_Pizzaria pizzaria, Livreur livreur) {
         this.vue = vue;
@@ -17,51 +19,60 @@ public class ControlerClient {
         this.pizzaria = pizzaria;
         this.livreur = livreur;
 
-        vue.setVoirSoldeListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                afficherSolde();
-            }
-        });
-
-        vue.setAjouterSoldeListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ajouterSolde();
-            }
-        });
-
-        vue.setCommanderListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                lancerVueClient();
-            }
-        });
+        vue.setVoirSoldeListener(e -> afficherSolde());
+        vue.setAjouterSoldeListener(e -> ajouterSolde());
+        vue.setCommanderListener(e -> lancerCommande());
+        vue.setHistoriqueListener(e -> afficherHistorique()); // ✅ Ajouté
     }
 
     private void afficherSolde() {
         double solde = client.getSolde();
-        javax.swing.JOptionPane.showMessageDialog(vue, "💰 Solde actuel : " + solde + "€", "Solde du client", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(vue, "💰 Solde actuel : " + solde + "€", "Solde du client", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void ajouterSolde() {
-        String input = javax.swing.JOptionPane.showInputDialog(vue, "Montant à ajouter (€):", "Ajouter solde", javax.swing.JOptionPane.PLAIN_MESSAGE);
+        String input = JOptionPane.showInputDialog(vue, "Montant à ajouter (€):", "Ajouter solde", JOptionPane.PLAIN_MESSAGE);
         try {
             double montant = Double.parseDouble(input);
             if (montant > 0) {
                 client.crediter(montant);
-                javax.swing.JOptionPane.showMessageDialog(vue, montant + "€ ajoutés avec succès !", "Ajout confirmé", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(vue, montant + "€ ajoutés avec succès !", "Ajout confirmé", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                javax.swing.JOptionPane.showMessageDialog(vue, "Le montant doit être positif.", "Erreur", javax.swing.JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(vue, "Le montant doit être positif.", "Erreur", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(vue, "Entrée non valide. Veuillez saisir un nombre.", "Erreur", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vue, "Entrée non valide. Veuillez saisir un nombre.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void lancerVueClient() {
+    private void lancerCommande() {
         vue.dispose();
-        VuePizzaSwing vue = new VuePizzaSwing();
-        new ControllerPizzaSwing(vue, pizzaria, client, livreur, new ArrayList<>());
+        VuePizzaSwing vuePizza = new VuePizzaSwing();
+        new ControllerPizzaSwing(vuePizza, pizzaria, client, livreur, historiqueCommandes); // ✅ Partage historique
+    }
+
+    private void afficherHistorique() {
+        JFrame frame = new JFrame("Historique des commandes");
+        JTextArea area = new JTextArea(20, 50);
+        area.setEditable(false);
+
+        if (historiqueCommandes.isEmpty()) {
+            area.setText("Aucune commande passée.");
+        } else {
+            for (Commande cmd : historiqueCommandes) {
+                area.append("Commande #" + cmd.getNumCommande() + "\n");
+                for (LigneCommande ligne : cmd.getLignes()) {
+                    area.append("- " + ligne.getQuantite() + " x " + ligne.getPizza().getNom() +
+                            " (" + ligne.getPizza().getTaille() + ") = " +
+                            (ligne.getQuantite() * ligne.getPizza().getPrixBase()) + "€\n");
+                }
+                area.append("Total : " + cmd.calculerPrixTotal() + "€\n\n");
+            }
+        }
+
+        frame.add(new JScrollPane(area));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

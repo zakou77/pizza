@@ -13,7 +13,7 @@ public class VuePizzaSwing extends JFrame {
     private JLabel labelPrixTotal;
     private JButton ajouterBtn;
     private JButton payerBtn;
-    private JButton historiqueBtn; // ✅ Ajouté
+    private JButton retourBtn; // ✅ Ajouté
 
     public VuePizzaSwing() {
         setTitle("Commande de Pizza");
@@ -50,15 +50,18 @@ public class VuePizzaSwing extends JFrame {
         // Bas de fenêtre
         JPanel bottomPanel = new JPanel(new BorderLayout());
         labelPrixTotal = new JLabel("Prix Total : 0€");
-        bottomPanel.add(labelPrixTotal, BorderLayout.WEST);
+        bottomPanel.add(labelPrixTotal, BorderLayout.CENTER);
 
-        JPanel rightPanel = new JPanel(new GridLayout(2, 1));
+        JPanel leftPanel = new JPanel();
+        retourBtn = new JButton("Retour"); // ✅ Ajouté
+        leftPanel.add(retourBtn);
+        bottomPanel.add(leftPanel, BorderLayout.WEST);
+
+        JPanel rightPanel = new JPanel(new GridLayout(1, 1));
         payerBtn = new JButton("Payer et Livrer");
-        historiqueBtn = new JButton("Voir Historique"); // ✅ Ajouté
         rightPanel.add(payerBtn);
-        rightPanel.add(historiqueBtn); // ✅ Ajouté
-
         bottomPanel.add(rightPanel, BorderLayout.EAST);
+
         add(bottomPanel, BorderLayout.SOUTH);
 
         setVisible(true);
@@ -102,7 +105,7 @@ public class VuePizzaSwing extends JFrame {
         payerBtn.addActionListener(listener);
     }
 
-    public void setHistoriqueListener(ActionListener listener) {
-        historiqueBtn.addActionListener(listener); // ✅ Ajouté
+    public void setRetourListener(ActionListener listener) {
+        retourBtn.addActionListener(listener); // ✅ Ajouté
     }
 }

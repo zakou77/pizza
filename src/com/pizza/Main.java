@@ -21,6 +21,7 @@ public class Main {
         // Création de la vue de connexion
         VueConnexion vueConnexion = new VueConnexion();
 
+
         // Lancement du contrôleur de connexion
         new ControleurConnexion(vueConnexion, pizzaria, livreur);
 

@@ -9,6 +9,8 @@ public class VueClient extends JFrame {
     private JButton voirSoldeBtn;
     private JButton ajouterSoldeBtn;
     private JButton commanderBtn;
+    private JButton historiqueBtn;
+    private JButton retourBtn;
 
     private JTextArea zoneAffichage;
 
@@ -19,24 +21,30 @@ public class VueClient extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Zone centrale d'affichage
+        // Zone centrale
         zoneAffichage = new JTextArea();
         zoneAffichage.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(zoneAffichage);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Barre de boutons en bas
+        // Boutons du bas
         JPanel boutonPanel = new JPanel();
+        Dimension boutonPanelSize = boutonPanel.getSize();
+        boutonPanel.setPreferredSize(new Dimension(boutonPanelSize.width, boutonPanelSize.height + 75));
+
         voirSoldeBtn = new JButton("Voir solde");
         ajouterSoldeBtn = new JButton("Ajouter solde");
         commanderBtn = new JButton("Commander");
+        historiqueBtn = new JButton("Voir historique");
+        retourBtn = new JButton("Retour");
 
         boutonPanel.add(voirSoldeBtn);
         boutonPanel.add(ajouterSoldeBtn);
         boutonPanel.add(commanderBtn);
+        boutonPanel.add(historiqueBtn);
+        boutonPanel.add(retourBtn);
 
         add(boutonPanel, BorderLayout.SOUTH);
-
         setVisible(true);
     }
 
@@ -52,6 +60,14 @@ public class VueClient extends JFrame {
 
     public void setCommanderListener(ActionListener listener) {
         commanderBtn.addActionListener(listener);
+    }
+
+    public void setHistoriqueListener(ActionListener listener) {
+        historiqueBtn.addActionListener(listener);
+    }
+
+    public void setRetourListener(ActionListener listener) {
+        retourBtn.addActionListener(listener);
     }
 
     public void appendTexte(String texte) {

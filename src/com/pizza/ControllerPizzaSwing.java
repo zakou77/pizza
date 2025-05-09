@@ -26,26 +26,13 @@ public class ControllerPizzaSwing {
         vue.setPizzaOptions(getNomsPizzas());
         nouvelleCommande();
 
-        vue.setAjouterListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ajouterPizzaCommande();
-            }
-        });
+        vue.setAjouterListener(e -> ajouterPizzaCommande());
 
-        vue.setPayerListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                payerCommande();
-            }
-        });
+        vue.setPayerListener(e -> payerCommande());
 
-        vue.setHistoriqueListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                afficherHistorique(); // ✅ Ajouté
-            }
-        });
+        vue.setRetourListener(e -> retourAccueil()); // ✅ Gérer retour
+
+        // Historique retiré de cette vue selon nouvelle demande
     }
 
     private String[] getNomsPizzas() {
@@ -94,28 +81,9 @@ public class ControllerPizzaSwing {
         }
     }
 
-    private void afficherHistorique() {
-        JFrame frame = new JFrame("Historique des commandes");
-        JTextArea area = new JTextArea(20, 50);
-        area.setEditable(false);
-
-        if (historiqueCommandes.isEmpty()) {
-            area.setText("Aucune commande passée.");
-        } else {
-            for (Commande cmd : historiqueCommandes) {
-                area.append("Commande #" + cmd.getNumCommande() + "\n");
-                for (LigneCommande ligne : cmd.getLignes()) {
-                    area.append("- " + ligne.getQuantite() + " x " + ligne.getPizza().getNom() +
-                            " (" + ligne.getPizza().getTaille() + ") = " +
-                            (ligne.getQuantite() * ligne.getPizza().getPrixBase()) + "€\n");
-                }
-                area.append("Total : " + cmd.calculerPrixTotal() + "€\n\n");
-            }
-        }
-
-        frame.add(new JScrollPane(area));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    private void retourAccueil() {
+        vue.dispose(); // Fermer la fenêtre actuelle
+        VueClient vueClient = new VueClient();
+        new ControlerClient(vueClient, client, pizzaria, livreur); // relance accueil
     }
 }
