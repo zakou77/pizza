@@ -1,7 +1,6 @@
 package com.pizza;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Point_Pizzaria {
@@ -23,15 +22,15 @@ public class Point_Pizzaria {
     }
 
     public List<Pizza> getMenu() {
-        return Collections.unmodifiableList(menu);
+        return menu;
     }
 
     public List<Livreur> getLivreurs() {
-        return Collections.unmodifiableList(livreurs);
+        return livreurs;
     }
 
     public List<Client> getClients() {
-        return Collections.unmodifiableList(clients);
+        return clients;
     }
 
     public void ajouterPizza(Pizza pizza) {
@@ -46,28 +45,10 @@ public class Point_Pizzaria {
         clients.add(client);
     }
 
-    // ✅ Simplifié : plus de recherche par taille
     public Pizza getPizza(String nom) {
         return menu.stream()
                 .filter(p -> p.getNom().equalsIgnoreCase(nom))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public Client connecterClient(int numeroTelephone) {
-        for (Client c : clients) {
-            if (c.getTelephone() == numeroTelephone) {
-                return c;
-            }
-        }
-        Client nouveauClient = new Client(
-                clients.size() + 1,
-                "Client" + numeroTelephone,
-                "Adresse inconnue",
-                50.0,
-                numeroTelephone
-        );
-        clients.add(nouveauClient);
-        return nouveauClient;
     }
 }

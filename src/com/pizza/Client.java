@@ -10,7 +10,6 @@ public class Client {
     private int telephone;
 
     private Vector<Commande> listC = new Vector<>();
-    private Point_Pizzaria pizzaria;
 
     public Client(int id, String nom, String adresse, double solde, int telephone) {
         this.id_Client = id;

@@ -25,8 +25,9 @@ public class ControllerPizzaSwing {
         nouvelleCommande();
 
         vue.setAjouterListener(e -> ajouterPizzaCommande());
+        vue.setSupprimerListener(e -> supprimerDernierePizza());
         vue.setPayerListener(e -> payerCommande());
-        vue.setRetourListener(e -> retourAccueil()); // ✅ Ajouté
+        vue.setRetourListener(e -> retourAccueil());
     }
 
     private String[] getNomsPizzas() {
@@ -38,7 +39,8 @@ public class ControllerPizzaSwing {
 
     private void nouvelleCommande() {
         commande = new Commande(numeroCommande++, "2025-05-09", client);
-        vue.setZoneCommandeText("Nouvelle commande n°" + commande.getNumCommande() + " créée\n");
+        vue.setZoneCommandeText("Une PIZZA offerte après 10 PIZZA acheter\n" +
+                "Nouvelle commande n°" + commande.getNumCommande() + " créée\n");
         vue.setPrixTotal(0);
     }
 
@@ -47,38 +49,97 @@ public class ControllerPizzaSwing {
         String taille = vue.getTailleSelectionnee();
         int quantite = vue.getQuantiteSelectionnee();
 
-        Pizza pizza = pizzaria.getPizza(nomPizza, taille);
+        Pizza pizza = pizzaria.getPizza(nomPizza);
         if (pizza != null) {
-            LigneCommande ligne = new LigneCommande(commande.getNumCommande(), quantite, pizza);
-            commande.ajouterLigne(ligne);
+            double coef = switch (taille) {
+                case "NAINE" -> 0.8;
+                case "OGRESSE" -> 1.2;
+                default -> 1.0;
+            };
 
-            double prixLigne = pizza.getPrixBase() * quantite;
-            vue.appendZoneCommande("+ " + quantite + " x " + nomPizza + " (" + taille + ") – " + prixLigne + "€\n");
+            LigneCommande ligne = new LigneCommande(commande.getNumCommande(), quantite, pizza, taille);
+            commande.ajouterLigne(ligne);
+            vue.appendZoneCommande("+ " + quantite + " x " + nomPizza + " (" + taille + ") – " + String.format("%.2f", ligne.getPrixLigne()) + "€\n");
+
             vue.setPrixTotal(commande.calculerPrixTotal());
         } else {
-            vue.appendZoneCommande("❌ Pizza non trouvée : " + nomPizza + " (" + taille + ")\n");
+            vue.appendZoneCommande("❌ Pizza non trouvée : " + nomPizza + "\n");
         }
+    }
+
+    private void supprimerDernierePizza() {
+        commande.retirerDerniereLigne();
+        vue.setZoneCommandeText("Commande n°" + commande.getNumCommande() + " mise à jour :\n");
+
+        for (LigneCommande l : commande.getLignes()) {
+            vue.appendZoneCommande("+ " + l.getQuantite() + " x " + l.getPizza().getNom()
+                    + " (" + l.getTaille() + ") – " + String.format("%.2f", l.getPrixLigne()) + "€\n");
+        }
+
+        vue.setPrixTotal(commande.calculerPrixTotal());
     }
 
     private void payerCommande() {
-        double total = commande.calculerPrixTotal();
-        if (client.peutPayer(total)) {
-            client.payer(total);
-            commande.setLivreur(livreur);
+        int totalPayantes = commande.getNombreTotalPayant();
+        double totalSansBonus = commande.calculerPrixTotal();
 
-            vue.appendZoneCommande("\n✅ Commande payée : " + total + "€\n");
-            vue.appendZoneCommande("🚚 Livrée par " + livreur.getNom_L() + " en " + livreur.getType_Vec() + "\n");
-
-            historiqueCommandes.add(commande);
-            nouvelleCommande();
-        } else {
+        if (!client.peutPayer(totalSansBonus)) {
             vue.appendZoneCommande("\n❌ Solde insuffisant !\n");
+            return;
         }
+
+        if (totalPayantes >= 10) {
+            String[] pizzas = getNomsPizzas();
+            String choixNom = (String) JOptionPane.showInputDialog(
+                    vue,
+                    "🎁 Vous avez droit à une pizza OFFERTE !\nChoisissez la pizza :",
+                    "Pizza offerte",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    pizzas,
+                    pizzas[0]
+            );
+
+            if (choixNom != null) {
+                String[] tailles = {"NAINE", "HUMAINE", "OGRESSE"};
+                String choixTaille = (String) JOptionPane.showInputDialog(
+                        vue,
+                        "Choisissez la taille :",
+                        "Taille offerte",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        tailles,
+                        "HUMAINE"
+                );
+
+                if (choixTaille != null) {
+                    Pizza pizza = pizzaria.getPizza(choixNom);
+                    LigneCommande gratuite = new LigneCommande(commande.getNumCommande(), 1, pizza, choixTaille);
+                    commande.ajouterLigne(gratuite);
+                    vue.appendZoneCommande("🎁 Pizza offerte ajoutée : " + choixNom + " (" + choixTaille + ")\n");
+                }
+            }
+        }
+
+        double totalFinal = commande.calculerPrixTotal();
+        client.payer(totalFinal);
+        commande.setLivreur(livreur);
+
+        vue.appendZoneCommande("\n✅ Commande payée : " + String.format("%.2f", totalFinal) + "€\n");
+        vue.appendZoneCommande("🚚 Livrée par " + livreur.getNom_L() + " en " + livreur.getType_Vec() + "\n");
+
+        JOptionPane.showMessageDialog(vue,
+                "✅ Merci pour votre commande n°" + commande.getNumCommande() + " !",
+                "Confirmation",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        historiqueCommandes.add(commande);
+        nouvelleCommande();
     }
 
     private void retourAccueil() {
-        vue.dispose(); // Ferme la fenêtre de commande
+        vue.dispose();
         VueClient vueClient = new VueClient();
-        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes); // ✅ Corrigé : 5 paramètres
+        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, List.of()); // ✅ tu peux mettre List.of() ou passer la liste réelle si tu veux y revenir
     }
 }

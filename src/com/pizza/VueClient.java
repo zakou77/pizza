@@ -13,6 +13,7 @@ public class VueClient extends JFrame {
     private JButton retourBtn;
 
     private JTextArea zoneAffichage;
+    private JLabel labelAccueil; // ✅ message personnalisé en haut
 
     public VueClient() {
         setTitle("Interface Pizza - Améliorée");
@@ -21,13 +22,18 @@ public class VueClient extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Zone centrale
+        // ✅ Barre d'accueil tout en haut
+        labelAccueil = new JLabel("", SwingConstants.CENTER);
+        labelAccueil.setFont(new Font("SansSerif", Font.BOLD, 16));
+        add(labelAccueil, BorderLayout.NORTH);
+
+        // ✅ Zone centrale de texte
         zoneAffichage = new JTextArea();
         zoneAffichage.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(zoneAffichage);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Boutons du bas
+        // ✅ Boutons en bas
         JPanel boutonPanel = new JPanel();
         Dimension boutonPanelSize = boutonPanel.getSize();
         boutonPanel.setPreferredSize(new Dimension(boutonPanelSize.width, boutonPanelSize.height + 75));
@@ -76,5 +82,10 @@ public class VueClient extends JFrame {
 
     public void setTexte(String texte) {
         zoneAffichage.setText(texte);
+    }
+
+    // ✅ Méthode pour afficher un message d'accueil personnalisé
+    public void setMessageAccueil(String texte) {
+        labelAccueil.setText(texte);
     }
 }

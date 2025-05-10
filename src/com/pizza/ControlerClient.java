@@ -10,7 +10,7 @@ public class ControlerClient {
     private final Point_Pizzaria pizzaria;
     private final Livreur livreur;
     private final List<Commande> historiqueCommandes;
-    private final List<String[]> profils; // ✅ ajout de l’attribut profils
+    private final List<String[]> profils;
 
     public ControlerClient(VueClient vue, Client client, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
         this.vue = vue;
@@ -18,13 +18,14 @@ public class ControlerClient {
         this.pizzaria = pizzaria;
         this.livreur = livreur;
         this.historiqueCommandes = historiqueCommandes;
-        this.profils = profils; // ✅ enregistrement de la liste
+        this.profils = profils;
 
+        vue.setMessageAccueil("👋 Bonjour " + client.getNom() + " " + client.getAdresse() + ", prêt pour une pizza ?");
         vue.setVoirSoldeListener(e -> afficherSolde());
         vue.setAjouterSoldeListener(e -> ajouterSolde());
         vue.setCommanderListener(e -> lancerCommande());
         vue.setHistoriqueListener(e -> afficherHistorique());
-        vue.setRetourListener(e -> retourConnexion()); // ✅ si bouton retour utilisé
+        vue.setRetourListener(e -> retourConnexion());
     }
 
     private void afficherSolde() {
@@ -49,7 +50,7 @@ public class ControlerClient {
     private void lancerCommande() {
         vue.dispose();
         VuePizzaSwing vuePizza = new VuePizzaSwing();
-        new ControllerPizzaSwing(vuePizza, pizzaria, client, livreur, historiqueCommandes, profils); // ✅ profils ajouté ici aussi
+        new ControllerPizzaSwing(vuePizza, pizzaria, client, livreur, historiqueCommandes); // ✅ profils ajouté
     }
 
 
@@ -77,10 +78,9 @@ public class ControlerClient {
         frame.setVisible(true);
     }
 
-
     private void retourConnexion() {
         vue.dispose();
         VueConnexion vueConnexion = new VueConnexion();
-        new ControleurConnexion(vueConnexion, pizzaria, livreur, historiqueCommandes, profils); // ✅ profils ajouté ici
+        new ControleurConnexion(vueConnexion, pizzaria, livreur, historiqueCommandes, profils);
     }
 }
