@@ -83,6 +83,11 @@ public class ControllerPizzaSwing {
         int totalPayantes = commande.getNombreTotalPayant();
         double totalSansBonus = commande.calculerPrixTotal();
 
+        if (commande.getNombreTotalPayant() == 0) {
+            vue.appendZoneCommande("\n❌ Commande vide. Veuillez ajouter au moins une pizza.\n");
+            return;
+        }
+
         if (!client.peutPayer(totalSansBonus)) {
             vue.appendZoneCommande("\n❌ Solde insuffisant !\n");
             return;
