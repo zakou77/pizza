@@ -8,7 +8,7 @@ public class Pizza {
 
     private Vector<LigneCommande> listLigne = new Vector<>();
     private Vector<Ingredient> listIng = new Vector<>();
-    private Point_Pizzaria pizzaria;
+    private Point_Pizzeria pizzaria;
 
     // Constructeurs
     public Pizza(String nomPizza, double prix) {
@@ -16,7 +16,7 @@ public class Pizza {
         this.prixBase = prix;
     }
 
-    public Pizza(String nomPizza, double prix, Point_Pizzaria pz) {
+    public Pizza(String nomPizza, double prix, Point_Pizzeria pz) {
         this.nom = nomPizza;
         this.prixBase = prix;
         this.pizzaria = pz;
@@ -39,7 +39,7 @@ public class Pizza {
         return listIng;
     }
 
-    public Point_Pizzaria getPizzaria() {
+    public Point_Pizzeria getPizzaria() {
         return pizzaria;
     }
 
@@ -60,7 +60,7 @@ public class Pizza {
         this.listIng = listIng;
     }
 
-    public void setPizzaria(Point_Pizzaria pz) {
+    public void setPizzaria(Point_Pizzeria pz) {
         this.pizzaria = pz;
     }
 }

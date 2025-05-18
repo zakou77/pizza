@@ -7,12 +7,12 @@ public class ControlerClient {
 
     private final VueClient vue;
     private final Client client;
-    private final Point_Pizzaria pizzaria;
+    private final Point_Pizzeria pizzaria;
     private final Livreur livreur;
     private final List<Commande> historiqueCommandes;
     private final List<String[]> profils;
 
-    public ControlerClient(VueClient vue, Client client, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
+    public ControlerClient(VueClient vue, Client client, Point_Pizzeria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
         this.vue = vue;
         this.client = client;
         this.pizzaria = pizzaria;

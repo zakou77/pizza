@@ -5,12 +5,12 @@ import java.util.List;
 public class ControleurConnexion {
 
     private VueConnexion vueConnexion;
-    private Point_Pizzaria pizzaria;
+    private Point_Pizzeria pizzaria;
     private Livreur livreur;
     private List<Commande> historiqueCommandes;
     private List<String[]> profils;
 
-    public ControleurConnexion(VueConnexion vueConnexion, Point_Pizzaria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
+    public ControleurConnexion(VueConnexion vueConnexion, Point_Pizzeria pizzaria, Livreur livreur, List<Commande> historiqueCommandes, List<String[]> profils) {
         this.vueConnexion = vueConnexion;
         this.pizzaria = pizzaria;
         this.livreur = livreur;

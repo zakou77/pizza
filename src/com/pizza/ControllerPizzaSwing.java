@@ -6,7 +6,7 @@ import javax.swing.*;
 public class ControllerPizzaSwing {
 
     private final VuePizzaSwing vue;
-    private final Point_Pizzaria pizzaria;
+    private final Point_Pizzeria pizzaria;
     private final Client client;
     private final Livreur livreur;
     private final List<Commande> historiqueCommandes;
@@ -14,7 +14,7 @@ public class ControllerPizzaSwing {
     private Commande commande;
     private int numeroCommande = 1;
 
-    public ControllerPizzaSwing(VuePizzaSwing vue, Point_Pizzaria pizzaria, Client client, Livreur livreur, List<Commande> historiqueCommandes) {
+    public ControllerPizzaSwing(VuePizzaSwing vue, Point_Pizzeria pizzaria, Client client, Livreur livreur, List<Commande> historiqueCommandes) {
         this.vue = vue;
         this.pizzaria = pizzaria;
         this.client = client;

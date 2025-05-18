@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Point_Pizzaria pizzaria = new Point_Pizzaria("123 Rue de la Pizza");
+        Point_Pizzeria pizzaria = new Point_Pizzeria("123 Rue de la Pizza");
 
         pizzaria.ajouterPizza(new Pizza("Margherita", 7.5));
         pizzaria.ajouterPizza(new Pizza("Reine",  10.0));

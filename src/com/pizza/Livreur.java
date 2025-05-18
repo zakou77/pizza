@@ -6,7 +6,7 @@ public class Livreur {
     public int id_liv;
     public String nom_L;
     public String type_Vec;
-    private Point_Pizzaria pizzaria;
+    private Point_Pizzeria pizzeria;
     private Vector <Commande> listCl = new Vector<Commande>();
 
     public Livreur(int id, String nom, String type, int i) {
@@ -27,11 +27,11 @@ public class Livreur {
         return type_Vec;
     }
 
-    public Point_Pizzaria getPizzaria() {
-        return pizzaria;
+    public Point_Pizzeria getPizzaria() {
+        return pizzeria;
     }
 
-    public void setPizzaria(Point_Pizzaria pz) {
-        pizzaria = pz;
+    public void setPizzaria(Point_Pizzeria pz) {
+        pizzeria = pz;
     }
 }

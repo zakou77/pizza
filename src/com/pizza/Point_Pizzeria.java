@@ -2,14 +2,14 @@ package com.pizza;
 
 import java.util.Vector;
 
-public class Point_Pizzaria {
+public class Point_Pizzeria {
 
     private String adresse;
     private Vector<Pizza> menu = new Vector<>();;
     private Vector<Livreur> livreurs = new Vector<>();;
     private Vector<Client> clients = new Vector<>();;
 
-    public Point_Pizzaria(String adresse) {
+    public Point_Pizzeria(String adresse) {
         this.adresse = adresse;
     }
 
