@@ -3,8 +3,11 @@ package com.pizza;
 public class Ingredient {
     public String nom;
     public int quantite;
+    Pizza pizza;
 
-    public Ingredient(String nom, int quantite) {
+
+    public Ingredient(String nom, int quantite, Pizza pizza) {
+        this.pizza = pizza;
         this.nom = nom;
         this.quantite = quantite;
     }

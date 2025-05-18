@@ -10,10 +10,11 @@ public class VueConnexion extends JFrame {
 
     public VueConnexion() {
         setTitle("Connexion Client");
-        setSize(900, 550);
+        setSize(850, 580);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        // === Fond personnalisé ===
         JPanel fond = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -22,22 +23,29 @@ public class VueConnexion extends JFrame {
                 g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), null);
             }
         };
-        fond.setLayout(null);
+        fond.setLayout(new GridBagLayout());
         setContentPane(fond);
 
-        // === Label ===
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 5, 15, 110);
+
+        // === Label titre ===
         JLabel labelTel = new JLabel("Numéro de téléphone :");
         labelTel.setFont(new Font("SansSerif", Font.BOLD, 22));
-        labelTel.setBounds(250, 230, 300, 30);
-        fond.add(labelTel);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        fond.add(labelTel, gbc);
 
-        // === Champ texte ===
-        numeroField = new JTextField();
+        // === Sous-panel : champ + bouton ===
+        JPanel ligneConnexion = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        ligneConnexion.setOpaque(false);
+
+        numeroField = new JTextField(15);
         numeroField.setFont(new Font("SansSerif", Font.PLAIN, 20));
-        numeroField.setBounds(200, 270, 330, 40); // décalé + largeur augmentée
-        fond.add(numeroField);
+        ligneConnexion.add(numeroField);
 
-        // === Bouton ===
         connexionBtn = new JButton("Se connecter");
         connexionBtn.setFont(new Font("SansSerif", Font.BOLD, 18));
         connexionBtn.setForeground(Color.WHITE);
@@ -46,8 +54,17 @@ public class VueConnexion extends JFrame {
         connexionBtn.setBorderPainted(false);
         connexionBtn.setOpaque(true);
         connexionBtn.setContentAreaFilled(true);
-        connexionBtn.setBounds(545, 270, 160, 40); // positionné juste à droite du champ
-        fond.add(connexionBtn);
+        ligneConnexion.add(connexionBtn);
+
+        // === Positionner la ligne champ+bouton ===
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+
+        // 🔽 ==> Ici tu peux modifier facilement le décalage
+        gbc.insets = new Insets(10, 70, 10, 10);  // Haut, Gauche, Bas, Droite
+        fond.add(ligneConnexion, gbc);
 
         setVisible(true);
     }

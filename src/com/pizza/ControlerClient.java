@@ -20,7 +20,7 @@ public class ControlerClient {
         this.historiqueCommandes = historiqueCommandes;
         this.profils = profils;
 
-        vue.setMessageAccueil("👋 Bonjour " + client.getNom() + " " + client.getAdresse() + ", prêt pour une pizza ?");
+        vue.setMessageAccueil("  👋 Bonjour " + client.getNom() + " " + client.getAdresse() + ", prêt pour une pizza ?");
         vue.setVoirSoldeListener(e -> afficherSolde());
         vue.setAjouterSoldeListener(e -> ajouterSolde());
         vue.setCommanderListener(e -> lancerCommande());

@@ -1,38 +1,36 @@
 package com.pizza;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class Point_Pizzaria {
 
     private String adresse;
-    private List<Pizza> menu;
-    private List<Livreur> livreurs;
-    private List<Client> clients;
+    private Vector<Pizza> menu = new Vector<>();;
+    private Vector<Livreur> livreurs = new Vector<>();;
+    private Vector<Client> clients = new Vector<>();;
 
     public Point_Pizzaria(String adresse) {
         this.adresse = adresse;
-        this.menu = new ArrayList<>();
-        this.livreurs = new ArrayList<>();
-        this.clients = new ArrayList<>();
     }
 
+    // === Getters ===
     public String getAdresse() {
         return adresse;
     }
 
-    public List<Pizza> getMenu() {
+    public Vector<Pizza> getMenu() {
         return menu;
     }
 
-    public List<Livreur> getLivreurs() {
+    public Vector<Livreur> getLivreurs() {
         return livreurs;
     }
 
-    public List<Client> getClients() {
+    public Vector<Client> getClients() {
         return clients;
     }
 
+    // === Méthodes pour ajouter ===
     public void ajouterPizza(Pizza pizza) {
         menu.add(pizza);
     }
@@ -45,10 +43,13 @@ public class Point_Pizzaria {
         clients.add(client);
     }
 
+    // === Trouver une pizza par son nom ===
     public Pizza getPizza(String nom) {
-        return menu.stream()
-                .filter(p -> p.getNom().equalsIgnoreCase(nom))
-                .findFirst()
-                .orElse(null);
+        for (Pizza p : menu) {
+            if (p.getNom().equalsIgnoreCase(nom)) {
+                return p;
+            }
+        }
+        return null;
     }
 }

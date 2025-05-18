@@ -5,6 +5,7 @@ public class LigneCommande {
     private int numCommande;
     private int quantite;
     private Pizza pizza;
+    private Commande commande;
     private String taille;
 
     public LigneCommande(int numCommande, int quantite, Pizza pizza, String taille) {
@@ -28,10 +29,6 @@ public class LigneCommande {
 
     public String getTaille() {
         return taille;
-    }
-
-    public void setTaille(String taille) {
-        this.taille = taille;
     }
 
     public double getPrixLigne() {

@@ -1,13 +1,15 @@
 package com.pizza;
 
-import java.util.ArrayList;
+
+import java.util.Vector;
 
 public class Commande {
     private int numCommande;
     private String dateCommande;
     private Client client;
     private Livreur livreur;
-    private ArrayList<LigneCommande> lignes = new ArrayList<>();
+    private Vector<LigneCommande> lignes = new Vector<>();
+
 
     public Commande(int num, String date, Client c) {
         this.numCommande = num;
