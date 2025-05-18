@@ -19,7 +19,7 @@ public class VueClient extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // === Fond personnalisé ===
+        // Fond personnalisé
         JPanel fondPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -35,7 +35,7 @@ public class VueClient extends JFrame {
         gbc.insets = new Insets(111, 10, 0, 10);
 
 
-        // === Ligne 0 : texte d’accueil à droite ===
+        // texte d’accueil
         GridBagConstraints gbcText = new GridBagConstraints();
         gbcText.gridx = 1;
         gbcText.gridy = 0;
@@ -52,7 +52,7 @@ public class VueClient extends JFrame {
 
 
 
-        // === Ligne 1 : boutons sous le texte ===
+        // boutons sous le texte
         JPanel boutonPanel = new JPanel(new GridBagLayout());
         boutonPanel.setOpaque(false);
 

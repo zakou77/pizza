@@ -16,7 +16,7 @@ public class Main {
 
         List<Commande> historiqueCommandes = new ArrayList<>();
 
-        // ✅ Profils simulés avec tableaux [prenom, nom, numero]
+        // Profils
         List<String[]> profils = new ArrayList<>();
         profils.add(new String[]{"Jean", "Dupont", "0612345678"});
         profils.add(new String[]{"KARIM", "benzema", "0711121314"});

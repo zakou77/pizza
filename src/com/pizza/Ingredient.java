@@ -11,7 +11,6 @@ public class Ingredient {
         this.nom = nom;
         this.quantite = quantite;
     }
-
     // Getters
     public String getNom() {
         return nom;
@@ -20,12 +19,10 @@ public class Ingredient {
     public int getQuantite() {
         return quantite;
     }
-
     // Setters
     public void setNom(String nom) {
         this.nom = nom;
     }
-
     public void setQuantite(int quantite) {
         this.quantite = quantite;
     }

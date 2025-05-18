@@ -13,7 +13,7 @@ public class Point_Pizzaria {
         this.adresse = adresse;
     }
 
-    // === Getters ===
+    // Getters
     public String getAdresse() {
         return adresse;
     }
@@ -30,7 +30,6 @@ public class Point_Pizzaria {
         return clients;
     }
 
-    // === Méthodes pour ajouter ===
     public void ajouterPizza(Pizza pizza) {
         menu.add(pizza);
     }
@@ -43,7 +42,6 @@ public class Point_Pizzaria {
         clients.add(client);
     }
 
-    // === Trouver une pizza par son nom ===
     public Pizza getPizza(String nom) {
         for (Pizza p : menu) {
             if (p.getNom().equalsIgnoreCase(nom)) {

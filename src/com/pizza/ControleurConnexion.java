@@ -47,20 +47,14 @@ public class ControleurConnexion {
             if (tel.equals(numero)) {
                 vueConnexion.afficherMessage("Bienvenue " + prenom + " " + nom + " !");
                 vueConnexion.dispose(); // Ferme la fenêtre de connexion
-
-                // ✅ Conversion du numéro en int car Client attend un int
                 int numeroInt = Integer.parseInt(tel);
-
-                // ✅ Création du client avec les bons arguments
                 Client client = new Client(1, nom, prenom, 50.0, numeroInt);
-
-                // ✅ Lancement de la fenêtre client
+                // Lancement de la fenêtre client
                 VueClient vueClient = new VueClient();
                 new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, profils);
                 return;
             }
         }
-
         vueConnexion.afficherMessage("Aucun compte n’est associé à ce numéro.");
     }
 }

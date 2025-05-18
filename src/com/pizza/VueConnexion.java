@@ -14,7 +14,7 @@ public class VueConnexion extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // === Fond personnalisé ===
+        // Fond personnalisé
         JPanel fond = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -29,7 +29,7 @@ public class VueConnexion extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 5, 15, 110);
 
-        // === Label titre ===
+        // Label titre
         JLabel labelTel = new JLabel("Numéro de téléphone :");
         labelTel.setFont(new Font("SansSerif", Font.BOLD, 22));
         gbc.gridx = 0;
@@ -38,7 +38,7 @@ public class VueConnexion extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         fond.add(labelTel, gbc);
 
-        // === Sous-panel : champ + bouton ===
+        // Sous-panel : champ + bouton
         JPanel ligneConnexion = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         ligneConnexion.setOpaque(false);
 
@@ -56,13 +56,11 @@ public class VueConnexion extends JFrame {
         connexionBtn.setContentAreaFilled(true);
         ligneConnexion.add(connexionBtn);
 
-        // === Positionner la ligne champ+bouton ===
+        //Positionner la ligne champ+bouton
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.WEST;
-
-        // 🔽 ==> Ici tu peux modifier facilement le décalage
         gbc.insets = new Insets(10, 70, 10, 10);  // Haut, Gauche, Bas, Droite
         fond.add(ligneConnexion, gbc);
 

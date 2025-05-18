@@ -145,6 +145,6 @@ public class ControllerPizzaSwing {
     private void retourAccueil() {
         vue.dispose();
         VueClient vueClient = new VueClient();
-        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, List.of()); // ✅ tu peux mettre List.of() ou passer la liste réelle si tu veux y revenir
+        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, List.of());
     }
 }

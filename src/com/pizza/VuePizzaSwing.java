@@ -12,7 +12,7 @@ public class VuePizzaSwing extends JFrame {
     private JSpinner quantiteSpinner;
     private JLabel labelPrixTotal;
     private JButton ajouterBtn;
-    private JButton supprimerBtn; // ✅ Bouton Supprimer
+    private JButton supprimerBtn;
     private JButton payerBtn;
     private JButton retourBtn;
 
@@ -34,14 +34,14 @@ public class VuePizzaSwing extends JFrame {
         topPanel.add(tailleBox);
 
         topPanel.add(new JLabel("Quantité:"));
-        quantiteSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
+        quantiteSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 1000, 1));
         topPanel.add(quantiteSpinner);
 
         ajouterBtn = new JButton("Ajouter");
         topPanel.add(ajouterBtn);
 
         supprimerBtn = new JButton("Supprimer");
-        topPanel.add(supprimerBtn); // ✅ Ajouté ici
+        topPanel.add(supprimerBtn);
 
         add(topPanel, BorderLayout.NORTH);
 
@@ -71,7 +71,7 @@ public class VuePizzaSwing extends JFrame {
         setVisible(true);
     }
 
-    // === Accesseurs ===
+    // Accesseurs
 
     public void setPizzaOptions(String[] nomsPizzas) {
         pizzaBox.setModel(new DefaultComboBoxModel<>(nomsPizzas));
@@ -106,7 +106,7 @@ public class VuePizzaSwing extends JFrame {
     }
 
     public void setSupprimerListener(ActionListener listener) {
-        supprimerBtn.addActionListener(listener); // ✅ Ajouté ici
+        supprimerBtn.addActionListener(listener);
     }
 
     public void setPayerListener(ActionListener listener) {
