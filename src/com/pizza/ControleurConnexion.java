@@ -51,7 +51,7 @@ public class ControleurConnexion {
                 Client client = new Client(1, nom, prenom, 50.0, numeroInt);
                 // Lancement de la fenêtre client
                 VueClient vueClient = new VueClient();
-                new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, profils);
+                new ControleurClient(vueClient, client, pizzaria, livreur, historiqueCommandes, profils);
                 return;
             }
         }

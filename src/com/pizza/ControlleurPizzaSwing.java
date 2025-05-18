@@ -3,7 +3,7 @@ package com.pizza;
 import java.util.List;
 import javax.swing.*;
 
-public class ControllerPizzaSwing {
+public class ControlleurPizzaSwing {
 
     private final VuePizzaSwing vue;
     private final Point_Pizzeria pizzaria;
@@ -14,7 +14,7 @@ public class ControllerPizzaSwing {
     private Commande commande;
     private int numeroCommande = 1;
 
-    public ControllerPizzaSwing(VuePizzaSwing vue, Point_Pizzeria pizzaria, Client client, Livreur livreur, List<Commande> historiqueCommandes) {
+    public ControlleurPizzaSwing(VuePizzaSwing vue, Point_Pizzeria pizzaria, Client client, Livreur livreur, List<Commande> historiqueCommandes) {
         this.vue = vue;
         this.pizzaria = pizzaria;
         this.client = client;
@@ -145,6 +145,6 @@ public class ControllerPizzaSwing {
     private void retourAccueil() {
         vue.dispose();
         VueClient vueClient = new VueClient();
-        new ControlerClient(vueClient, client, pizzaria, livreur, historiqueCommandes, List.of());
+        new ControleurClient(vueClient, client, pizzaria, livreur, historiqueCommandes, List.of());
     }
 }
